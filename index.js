@@ -47,16 +47,28 @@ function addTodoToDOM(todo) {
     const li = document.createElement("li");
     li.classList.add("todo-list-element");
     li.innerHTML = `
-    <h2>Task: <br> ${todo.task}</h2>
-    <h2>Due Date: <br> ${todo.dueDate}</h2>
+    <h2>Task: ${todo.task}</h2>
+    <h2>Due Date: ${todo.dueDate}</h2>
     <input type="checkbox" ${todo.completed ? "checked" : ""}>
+    <button class="delete-btn">Delete</button>
   `;
+    // --- Checkbox logic ---
     const checkbox = li.querySelector("input[type='checkbox']");
     checkbox.addEventListener("change", () => {
         todo.completed = checkbox.checked;
         const todos = getTodosFromStorage();
         const updated = todos.map(t => t.task === todo.task && t.dueDate === todo.dueDate ? todo : t);
         saveTodosToStorage(updated);
+    });
+    // --- Delete button logic ---
+    const deleteBtn = li.querySelector(".delete-btn");
+    deleteBtn.addEventListener("click", () => {
+        // 1. Remove from DOM
+        li.remove();
+        // 2. Remove from localStorage
+        const todos = getTodosFromStorage();
+        const filtered = todos.filter(t => !(t.task === todo.task && t.dueDate === todo.dueDate));
+        saveTodosToStorage(filtered);
     });
     todoUl.appendChild(li);
 }
