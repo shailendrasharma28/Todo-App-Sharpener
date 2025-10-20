@@ -98,9 +98,10 @@ ul {
 .todo-list-element {
     display: flex;
     list-style: none;
-    gap: 40px;
+    gap: 100px;
+    line-height: 30px;
     font-size: 0.8rem;
-    color: rgb(211, 120, 0);
+    color: rgb(0, 93, 168);
     padding: 5px 40px;
 }
 
@@ -109,8 +110,4 @@ ul {
     border: none;
     box-shadow: none;
     width: 20px;
-}
-
-.todo-list-element h2 {
-    color: red;
 }
